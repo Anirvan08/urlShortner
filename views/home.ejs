@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+        }
+    </style>
+    <title>Home Page</title>
+</head>
+<body>
+    <h1>URL SHORTENER</h1>
+
+    <% if (locals.id) { %>
+        <p>Generated ID: http://localhost:8000/url/<%= id %></p>
+    <% } %>
+
+    <form action="/url" method="POST">
+        <label for="">Enter the link you want to shorten:</label>
+        <input 
+            type="text" 
+            placeholder="https://www.example.com"
+            name="url">
+        <button type="submit">Generate</button>
+    </form>
+
+    <div>
+        <% if (urls && urls.length > 0) { %>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Sr. No.</th>
+                        <th>ShortId</th>
+                        <th>Redirect</th>
+                        <th>Clicks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% urls.forEach((url, index) => { %>
+                        <tr>
+                            <td><%= index + 1 %></td> <!-- Fixed index rendering -->
+                            <td><%= url.shortId %></td> <!-- Corrected to use 'shortId' -->
+                            <td><%= url.redirectURL %></td> <!-- Render redirectURL correctly -->
+                            <td><%= url.visitHistory.length %></td> <!-- Render visitHistory length -->
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        <% } else { %>
+            <p>No URLs found.</p>
+        <% } %>
+    </div>
+</body>
+</html>

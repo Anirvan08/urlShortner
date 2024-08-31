@@ -16,7 +16,9 @@ async function handleGenerateNewShortURL(req,res) {
         versionHistory : []
     });
 
-    return res.json({id : shortID}); 
+    return res.render('home', {
+        id : shortID
+    })
      
 }
 

@@ -5,10 +5,20 @@ const router = express.Router();
 
 
 router.get('/', async (req,res) => {
-    const allUrls = await URL.find({})
-    res.render('home', {
+    if(!req.user)
+        return res.redirect('/login')
+    const allUrls = await URL.find({createdBy : req.user._id})
+    return res.render('home', {
         urls : allUrls
     });
+})
+
+router.get('/signup', (req,res) => {
+    return res.render('signUp');
+})
+
+router.get('/login', (req,res) => {
+    return res.render('login');
 })
 
 

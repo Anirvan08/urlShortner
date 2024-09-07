@@ -14,7 +14,7 @@
     <h1>URL SHORTENER</h1>
 
     <% if (locals.id) { %>
-        <p>Generated ID: http://localhost:8000/url/<%= id %></p>
+        <p>Generated ID: https://localhost:8000/url/<%= id %></p>
     <% } %>
 
     <form action="/url" method="POST">
@@ -27,7 +27,7 @@
     </form>
 
     <div>
-        <% if (urls && urls.length > 0) { %>
+        <% if (locals.urls) { %>
             <table>
                 <thead>
                     <tr>
